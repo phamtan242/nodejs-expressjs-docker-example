@@ -14,7 +14,7 @@ services:
     ports:
       - 34567:3000
     volumes:
-      - ./src/:/app/src/
+      - ./src:/app/src
     networks:
       - internal
 networks:

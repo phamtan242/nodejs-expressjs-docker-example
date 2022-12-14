@@ -5,7 +5,7 @@
            xsi:schemaLocation="http://www.hazelcast.com/schema/config
            https://www.hazelcast.com/schema/config/hazelcast-config-4.2.xsd">
 
-  <cluster-name>dev</cluster-name>
+  <cluster-name>hazelcast</cluster-name>
   <management-center scripting-enabled="true"  />
   <network>
      <port auto-increment="true" port-count="10">5701</port>

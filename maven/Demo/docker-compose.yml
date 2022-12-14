@@ -5,10 +5,33 @@ services:
     image: hazelcast/hazelcast:4.1.10
     ports:
     - "5701:5701"
+    restart: unless-stopped
+    networks:
+      - hazelcast-nw
+    volumes:
+      - ./src/main/resources/hazelcast.xml:/opt/hazelcast/hazelcast.xml
+    environment:
+      - JAVA_OPTS="-Dhazelcast.config=/opt/hazelcast/hazelcast.xml"
   management-center:
     image: hazelcast/management-center:5.2.1
     ports:
     - "8080:8080"
-    environment:
-    - MC_DEFAULT_CLUSTER=dev
-    - MC_DEFAULT_CLUSTER_MEMBERS=hazelcast
+    restart: unless-stopped
+    networks:
+      - hazelcast-nw
+    # environment:
+    # - MC_DEFAULT_CLUSTER=dev
+    # - MC_DEFAULT_CLUSTER_MEMBERS=hazelcast
+    volumes:
+      - hazelcast-data:/data
+
+networks:
+  hazelcast-nw:
+    driver: bridge
+volumes:
+  hazelcast-data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./.tmp

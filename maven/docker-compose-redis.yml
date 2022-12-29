@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  redis-stack:
+    image: redis/redis-stack:latest
+    ports:
+      - 6379:6379
+      - 8001:8001
+    restart: unless-stopped
+    networks:
+      - redis-nw
+    volumes:
+      - redis-data/:/data
+    # environment:
+      # - REDIS_ARGS="--requirepass passw0rd!"
+    #   - redis_DEFAULT_USER=user
+    #   - redis_DEFAULT_PASS=passw0rd
+
+networks:
+  redis-nw:
+    driver: bridge
+volumes:
+  redis-data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./.tmp/redis

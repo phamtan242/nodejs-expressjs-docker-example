@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xs3p.xsl"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  attributeFormDefault="qualified" elementFormDefault="qualified"
+  version="1.0">
+
+  <!-- Login Req -->
+  <xs:complexType name="LoginReq">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="1" name="username" type="xs:string" />
+      <xs:element form="qualified" minOccurs="1" name="password" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoginResp">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="1" name="token" type="xs:string" />
+      <xs:element form="qualified" minOccurs="1" name="success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

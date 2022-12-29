@@ -1,0 +1,2 @@
+INSERT INTO users (username, password, fullname, is_supervisor) VALUES ('supervisor1', '123456', 'Supervisor 1', true);
+INSERT INTO users (username, password, fullname, is_supervisor) VALUES ('user1', '123456', 'User 1', false);

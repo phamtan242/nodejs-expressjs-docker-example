@@ -22,7 +22,6 @@ public class ServerCacheCfg {
             RedisClient redisClient = new RedisClient(RedisURI.create(uri));
             RedisConnection<String, String> connection = redisClient.connect();
 
-
             @Override
             public String get(String pKey) {
                 return connection.get(pKey);
@@ -32,7 +31,6 @@ public class ServerCacheCfg {
             public void set(String pKey, String pValue) {
                 connection.set(pKey, pValue);                
             }
-            
         };
     }
 }

@@ -20,9 +20,8 @@ public class EmbeddedCacheCfg {
                     .build(new CacheLoader<String, String>() {
                         @Override
                         public String load(final String pKey) throws Exception {
-
-                            // return slowMethod(s);
-                            return "default=value";
+                            // do something, but in this case we return null
+                            return null;
                         }
                     });
 

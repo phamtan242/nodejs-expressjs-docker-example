@@ -6,14 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import com.google.common.cache.LoadingCache;
-import com.tanpn.interfaces.ICache;
-
-import java.lang.Thread;
-import java.util.Arrays;
-
 /**
- * Hello world!
+ * SpringBootApplication
  *
  */
 @SpringBootApplication
@@ -29,10 +23,10 @@ public class App
         return args -> {
             String[] beanNames = ctx.getBeanDefinitionNames();
             System.out.println("Initiated total " + beanNames.length + " beans!");
-            // Arrays.sort(beanNames);
-            // for (String beanName : beanNames) {
-            //     System.out.println(beanName);
-            // }
+            java.util.Arrays.sort(beanNames);
+            for (String beanName : beanNames) {
+                System.out.println(beanName);
+            }
             
             // ICache<String, String> lvSimpleCaching = (ICache) ctx.getBean("serverCacheTemplate");
             // lvSimpleCaching.set("name1", "my-name");

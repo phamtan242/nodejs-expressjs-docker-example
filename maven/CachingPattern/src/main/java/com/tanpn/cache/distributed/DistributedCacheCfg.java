@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Lazy;
 
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
+import com.hazelcast.config.Config;
+import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.map.IMap;
 import com.tanpn.interfaces.ICache;
@@ -17,18 +19,24 @@ public class DistributedCacheCfg {
     @Bean
     public ICache<String, String> distributedCacheTemplate() {
         return new ICache<String, String>() {
-            // Start the Hazelcast Client and connect to an already running Hazelcast
-            // Cluster on 127.0.0.1
-            ClientConfig lvClientConfig = new ClientConfig();
+            // ClientConfig lvClientConfig = new ClientConfig();
+            // {
+            //     // Cluster name must be same as on config at src/main/resources/hazelcast.xml
+            //     final String lvClusterName = "hazelcast";
+            //     lvClientConfig.setClusterName(lvClusterName);
+            //     lvClientConfig.setInstanceName("dev-instance");
+            // }
+            // HazelcastInstance lvHzClient = HazelcastClient.newHazelcastClient(lvClientConfig);
+            // {
+            //     System.out.println("Hazelcast connected to cluster name " + lvHzClient.getConfig().getClusterName());
+            // }
+
+            Config lvHzConfig = new Config();
             {
-                lvClientConfig.setClusterName("hazelcast");
-                lvClientConfig.setInstanceName("dev-instance");
+                lvHzConfig.setClusterName("hazelcast");
             }
-            HazelcastInstance lvHazelcastInstance = HazelcastClient.newHazelcastClient(lvClientConfig);
-            {
-                System.out.println("Hazelcast connected to cluster name " + lvHazelcastInstance.getConfig().getClusterName());
-            }
-            IMap<String, String> simpleCaching = lvHazelcastInstance.getMap("my-distributed-map");
+            HazelcastInstance lvHzInstance = Hazelcast.newHazelcastInstance(lvHzConfig);
+            IMap<String, String> simpleCaching = lvHzInstance.getMap("distributed-map");
 
             @Override
             public String get(String pKey) {
@@ -39,7 +47,6 @@ public class DistributedCacheCfg {
             public void set(String pKey, String pValue) {
                 simpleCaching.put(pKey, pValue);
             }
-
         };
     }
 }

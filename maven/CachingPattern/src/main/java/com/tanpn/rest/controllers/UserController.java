@@ -62,5 +62,4 @@ public class UserController {
         }
         return new ResponseEntity<>(lvLoginResp, lvLoginResp.isSuccess() ? HttpStatus.OK : HttpStatus.UNAUTHORIZED);
     }
-
 }
